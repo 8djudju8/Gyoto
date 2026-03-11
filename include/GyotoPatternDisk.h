@@ -30,6 +30,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <optional>
 
 namespace Gyoto{
   namespace Astrobj { class PatternDisk; }
@@ -140,7 +141,8 @@ class Gyoto::Astrobj::PatternDisk : public Astrobj::ThinDisk {
   virtual void fitsRead(std::string filename_);
 
   /// Write parameters and arrays to FITS file
-  virtual void fitsWrite(std::string filename_);
+  virtual void fitsWrite(std::string filename_, std::optional<std::string> prefix);
+  // virtual void fitsWrite(std::string filename_, std::string prefix);
 #endif
 
   /// Set PatternDisk::emission_

@@ -37,6 +37,7 @@
 #include <cstring>
 #include <cmath>
 #include <limits>
+#include <optional>
 
 using namespace std;
 using namespace Gyoto;
@@ -472,7 +473,7 @@ void PatternDisk::fitsRead(string filename) {
   fptr = NULL;
 }
 
-void PatternDisk::fitsWrite(string filename) {
+void PatternDisk::fitsWrite(std::string filename, std::optional<string> prefix) {
   if (!emission_) GYOTO_ERROR("PatternDisk::fitsWrite(filename): nothing to save!");
   filename_ = filename;
   char*     pixfile   = const_cast<char*>(filename_.c_str());
@@ -483,6 +484,12 @@ void PatternDisk::fitsWrite(string filename) {
   char * CNULL=NULL;
 
   char      ermsg[31] = ""; // ermsg is used in throwCfitsioError()
+
+
+  if (!prefix)
+    cout << "NO PREFIX  " << filename << endl;
+  else
+    cout << filename << " : PREFIX :" << prefix.value() << endl;
 
   ////// CREATE FILE
   GYOTO_DEBUG << "creating file \"" << pixfile << "\"... ";
