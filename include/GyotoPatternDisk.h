@@ -141,7 +141,7 @@ class Gyoto::Astrobj::PatternDisk : public Astrobj::ThinDisk {
   virtual void fitsRead(std::string filename_);
 
   /// Write parameters and arrays to FITS file
-  virtual void fitsWrite(std::string filename_, std::optional<std::string> prefix);
+  virtual void fitsWrite(std::string filename_, std::optional<std::string> prefix =std::nullopt);
   // virtual void fitsWrite(std::string filename_, std::string prefix);
 #endif
 

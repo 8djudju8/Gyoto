@@ -1288,7 +1288,8 @@ size_t gyotoid(PyObject* obj);
   if ($input == Py_None) {
     $1 = std::nullopt;
   } else {
-    $1 = std::optional<std::string>(PyUnicode_AsUTF8($input));
+    //$1 = std::optional<std::string>(PyUnicode_AsUTF8($input));
+    $1 = std::string(PyUnicode_AsUTF8($input));
   }
 }
 
@@ -1299,15 +1300,11 @@ size_t gyotoid(PyObject* obj);
 %apply std::string { std::optional<std::string> prefix }
 
 // Overload for the function with 2 arguments (omitting the optional)
-//%inline %{
-//  void say_mssgg(std::string name){
-//    say_mssgg(name, std::nullopt);
-//  }
-//%}
 
-%extend Gyoto::Astrobj::PatternDisk {
-    void fitsWrite(std::string filename) { ($self)->fitsWrite(filename, std::nullopt); }
-}
+//%extend Gyoto::Astrobj::PatternDisk {
+//    void fitsWrite(std::string filename) { ($self)->fitsWrite(filename, std::nullopt); }
+//}
 //%include GyotoPatternDisk.h
+
 
 

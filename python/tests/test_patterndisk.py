@@ -131,6 +131,7 @@ class TestPatternDisk(unittest.TestCase):
         # Save Scenery different path
         print("========= THIRD CASE save scenery fits xml different directory")
         # pd.fitsWrite("!" + GYOTO_ARTIFACTS_DIR + "check-patterndisk.fits.gz")
+        # pd.fitsWrite("check-patterndisk.fits.gz", "LALLAL")
         pd.fitsWrite("check-patterndisk.fits.gz", "!" + GYOTO_ARTIFACTS_DIR)
         print("fitswrite ok")
         gyoto.core.Factory(sc).write("check-patterndisk.xml")
