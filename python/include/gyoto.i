@@ -1284,20 +1284,20 @@ size_t gyotoid(PyObject* obj);
 //}
 
 // Typemaps for std::optional<std::string>
-%typemap(in) std::optional<std::string> {
-  if ($input == Py_None) {
-    $1 = std::nullopt;
-  } else {
+//%typemap(in) std::optional<std::string> {
+//  if ($input == Py_None) {
+//    $1 = std::nullopt;
+//  } else {
     //$1 = std::optional<std::string>(PyUnicode_AsUTF8($input));
-    $1 = std::string(PyUnicode_AsUTF8($input));
-  }
-}
+//    $1 = std::string(PyUnicode_AsUTF8($input));
+//  }
+//}
 
-%typecheck(SWIG_TYPECHECK_STRING) std::optional<string> {
-  $1 = PyString_Check($input) ? 1 : 0;
-}
+//%typecheck(SWIG_TYPECHECK_STRING) std::optional<string> {
+//  $1 = PyString_Check($input) ? 1 : 0;
+//}
 
-%apply std::string { std::optional<std::string> prefix }
+//%apply std::string { std::optional<std::string> prefix }
 
 // Overload for the function with 2 arguments (omitting the optional)
 
