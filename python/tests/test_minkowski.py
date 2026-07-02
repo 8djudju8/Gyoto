@@ -195,6 +195,7 @@ class TestMinkowski(unittest.TestCase):
                 - np.expand_dims(data[:, 0], 1)
                 * vel[:] - pos[1:4]))))
         if (maxerr > 1e-10):
+            print("cartesian other")
             print("error integration produced wrong results")
         print("done\n")
 
@@ -256,6 +257,7 @@ class TestMinkowski(unittest.TestCase):
                        / np.expand_dims(data[:, 4], 1)
                        - np.expand_dims(pos[1:], 0)))))
         if (maxerr > 1e-10):
+            print("cartesian photon")
             print("error integration produced wrong results")
 
     def test_Minkowski_cartesian_star_2(self):
@@ -318,6 +320,7 @@ class TestMinkowski(unittest.TestCase):
                        / np.expand_dims(data[:, 4], 1)
                        - np.expand_dims(pos[1:], 0)))))
         if (maxerr > 1e-10):
+            print("cartesian star 2")
             print("error integration produced wrong results")
 
         # maxerr = (np.max(
@@ -422,7 +425,7 @@ class TestMinkowski(unittest.TestCase):
 
     def test_Minkowski_moving_star(self):
         gg = gyoto.std.Minkowski()
-        gg.spherical(True)
+        # gg.spherical(False)
 
         print("checking moving star")
         pos = [0., 10.791, np.pi / 2., 0]

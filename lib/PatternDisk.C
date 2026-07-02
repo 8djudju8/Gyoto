@@ -473,7 +473,7 @@ void PatternDisk::fitsRead(string filename) {
   fptr = NULL;
 }
 
-void PatternDisk::fitsWrite(std::string filename, std::optional<string> prefix) {
+void PatternDisk::fitsWrite(std::string filename, const std::string & prefix) {
   if (!emission_) GYOTO_ERROR("PatternDisk::fitsWrite(filename): nothing to save!");
   filename_ = filename;
   char*     pixfile   = const_cast<char*>(filename_.c_str());
@@ -485,13 +485,27 @@ void PatternDisk::fitsWrite(std::string filename, std::optional<string> prefix) 
 
   char      ermsg[31] = ""; // ermsg is used in throwCfitsioError()
 
-
-  if (!prefix)
-    cout << "NO PREFIX  " << filename << endl;
+  if (prefix != ""){
+    cout << "filename :" << filename << " : PREFIX |" << prefix << "|"<< endl;
+    //filename_ = filename
+    if (filename_.compare(0,1,"!")){
+//        pixfile = const_cast<char*>((prefix.append(filename_)).c_str());
+        pixfile = const_cast<char*>((filename_.insert(0,prefix)).c_str());
+        GYOTO_INFO << "pixfile :" << pixfile << endl;
+    }
+    else{
+        cout << "filename :" << filename << " : PREFIX |" << prefix << "|"<< endl;
+        filename_ = filename_.substr(1); 
+//        pixfile = const_cast<char*>((prefix.append(filename_).insert(0,"!")).c_str());
+        pixfile = const_cast<char*>((filename_.insert(0,"!" + prefix)).c_str());
+//        pixfile = const_cast<char*>((filename_.insert(0,prefix).insert(0,"!")).c_str());
+    }
+  }
   else
-    cout << filename << " : PREFIX :" << prefix.value() << endl;
+    cout << "NO PREFIX  " << filename << endl;
 
   ////// CREATE FILE
+ GYOTO_INFO << " writing pixfile :" << pixfile << endl;
   GYOTO_DEBUG << "creating file \"" << pixfile << "\"... ";
   fits_create_file(&fptr, pixfile, &status);
   if (debug()) cerr << "done." << endl;

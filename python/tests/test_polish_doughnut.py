@@ -33,7 +33,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 
 gyoto.core.requirePlugin('stdplug')
 
-GYOTO_EXAMPLES_DIR = os.path.join("./", "../../doc/examples/")
+GYOTO_EXAMPLES_DIR = os.path.join("./", "../doc/examples/")
 PD_XML = GYOTO_EXAMPLES_DIR + "example-polish-doughnut.xml"
 print(PD_XML)
 

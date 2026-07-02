@@ -30,7 +30,7 @@ import gyoto.spectrometer
 # import inspect
 # import matplotlib.pyplot as plt
 
-from helpers import helpers
+from tests.helpers import helpers
 
 gyoto.core.requirePlugin('stdplug')
 
@@ -68,10 +68,10 @@ class TestKerrKS(unittest.TestCase):
         gg.spin(0.)
         print("done")
 
-        # positions = [[0, 10., 12., 5.],
-        #             [0, 5., 2., 7.],
-        #             [0, -10., 0., 50.],
-        #             [0, 0., 0., 10000.]]
+        positions = ((0, 10., 12., 5.),
+                     (0, 5., 2., 7.),
+                     (0, -10., 0., 50.),
+                     (0, 0., 0., 10000.))
 
         # check_gmunu, gg, positions;
         # check_gmunu_up, gg, positions;
@@ -99,16 +99,28 @@ class TestKerrKS(unittest.TestCase):
         # self.hlpr.check_jacobian(gg, pos)
         a = gg.jacobian(pos)
         b = gyoto.metric.jacobian_numerical(gg, pos, epsilon=1e-06)
+        print(a)
+        print(f"{type(a)=}")
+        print(b)
+        print(f"{type(b)=}")
+
         np.testing.assert_array_almost_equal(a, b)
         print("checking christoffel")
         # check_christoffels, gg, positions;
         pos = (0, 10., 12., 5.)
         # TODO renvoi None
-        a = gyoto.metric.check_christoffel(gg)
+        print(f"{type(gg)=}")
+        print(f"{gg.Spin=}")
+        try:
+            gyoto.metric.check_christoffel(gg, positions, epsilon=1e-06)
+        except AssertionError as e:
+            self.fail(e.__str__())
         b = gyoto.metric.christoffel_numerical(gg, pos, epsilon=1e-06)
         # np.testing.assert_array_almost_equal(a, b)
         print(a)
+        print(f"{type(a)=}")
         print(b)
+        print(f"{type(b)=}")
 
         print("KerrKS metric Kerr in Kerr-Schild coordinates")
 

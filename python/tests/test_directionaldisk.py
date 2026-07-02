@@ -113,15 +113,16 @@ class TestMetric(unittest.TestCase):
         print("Saving data to fits file...")
         # directional_disk.fitsWrite("check-directionaldisk.fits.gz")
         print(f"{GYOTO_ARTIFACTS_DIR + "check-directionaldisk.fits.gz"}")
-        directional_disk.fitsWrite(
-            GYOTO_ARTIFACTS_DIR + "check-directionaldisk.fits.gz")
+        directional_disk.fitsWrite("!check-directionaldisk.fits.gz",
+                                   GYOTO_ARTIFACTS_DIR)
         print("Saving scenery to XML file...")
         gyoto.core.Factory(sc).write(
             GYOTO_ARTIFACTS_DIR + "check-directionaldisk.xml")
         print("Reading back scenery...")
         print("Reading back scenery...")
         # sc2 = gyoto.core.Scenery("check-directionaldisk.xml")
-        sc2 = gyoto.core.Factory("check-directionaldisk.xml").scenery()
+        sc2 = gyoto.core.Factory(GYOTO_ARTIFACTS_DIR
+                                 + "check-directionaldisk.xml").scenery()
         # GYOTO_ARTIFACTS_DIR + "check-directionaldisk.xml").scenery()
         # Check
         # Compare Sceneries

@@ -128,7 +128,7 @@ class Gyoto::Astrobj::Disk3D : public Gyoto::Astrobj::Generic {
   virtual void fitsRead(std::string filename_);
 
   /// Write parameters and arrays to FITS file.
-  virtual void fitsWrite(std::string filename_);
+  virtual void fitsWrite(std::string filename_, const std::string & prefix = "");
 #endif
 
   void file(std::string const &f);

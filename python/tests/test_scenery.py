@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 
 gyoto.core.requirePlugin('stdplug')
 
-GYOTO_EXAMPLES_DIR = "../../doc/examples/"
+GYOTO_EXAMPLES_DIR = "../doc/examples/"
 
 
 class TestScenery(unittest.TestCase):

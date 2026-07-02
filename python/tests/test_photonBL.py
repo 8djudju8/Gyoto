@@ -36,13 +36,14 @@ gyoto.core.requirePlugin('stdplug')
 
 class TestPhotonBL(unittest.TestCase):
     def test_create_obj_PhotonBL(self):
-        sc = gyoto.core.Scenery()
         print("Photon in KerrBL metric")
         aa = 0.
         gg = gyoto.std.KerrBL()
         gg.spin(aa)
         gg2 = gg.clone()
+        sc = gyoto.core.Scenery()
         sc.metric(gg)
+        print(f"{sc.NormTol=}")
         print("Creating Photon: ")
         ph = gyoto.core.Photon()
         self.assertEqual(ph.getMass(), 0.0)
@@ -51,6 +52,12 @@ class TestPhotonBL(unittest.TestCase):
         # else:
         #    print("error PREVIOUS CHECK FAILED")
 
+        # gg.deltaMin(1E-10)
+        # gg.set("deltaMin", 1E-10)
+        gg.deltaMin()
+        sc.tMin(-1e-6)
+        sc.absTol(1e-16)
+        sc.relTol(1e-16)
         print("Attaching metric: ")
         ph.metric(gg)
         assert ph.getProperties() is not None
@@ -92,7 +99,7 @@ class TestPhotonBL(unittest.TestCase):
                        - [0, 6, 1.5708, 0, 1.38165, 0, 0, 0.0555556]))) < 1e-5:
             print("done.\n")
         else:
-            print("error PREVIOUS CHECK FAILED")
+            print("error PREVIOUS CHECK FAILED 1")
 
         print("Setting metric spin")
         gg.spin(0.95)
@@ -113,7 +120,7 @@ class TestPhotonBL(unittest.TestCase):
         print("done")
 
         print("Trying gyoto_Star_xFill")
-        st.xFill(770.)
+        st.xFill(10.)
         print("done")
 
         # TODO add scenery + rayTrace
@@ -139,7 +146,7 @@ class TestPhotonBL(unittest.TestCase):
         print("done.\n")
         print("Checking gyoto_Metric_setSpin: ")
         gg.spin(0.)
-
+        gg.deltaMin(40)
         print("done.\n")
         print("Checking gyoto_Star(): ")
         orbit = gyoto.std.Star()
@@ -179,16 +186,18 @@ class TestPhotonBL(unittest.TestCase):
         print("Checking gyoto_Photon(delta=1): ")
         print("done.\n")
         print("Checking gyoto_Photon(is_hit=1): ")
-        hit1=ph1.hit()
-        hit2=ph2.hit()
+        hit1 = ph1.hit()
+        hit2 = ph2.hit()
         n1 = ph1.get_nelements()
         n2 = ph2.get_nelements()
+        print(f"{n1=}")
+        print(f"{n2=}")
         print(f"hit1: {hit1}")
         print(f"hit2: {hit2}")
         if (ph1.hit() and ph2.hit()):
-           print("done.\n")
+            print("done.\n")
         else:
-           print("error PREVIOUS CHECK FAILED")
+            print("error PREVIOUS CHECK FAILED 2")
         print("_________________________")
         # n1 = ph1.get_nelements()
         # n2 = ph2.get_nelements()
