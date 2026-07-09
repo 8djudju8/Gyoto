@@ -34,7 +34,7 @@ import gyoto.spectrometer
 
 gyoto.core.requirePlugin('stdplug')
 
-GYOTO_EXAMPLES_DIR = "../../doc/examples/"
+GYOTO_EXAMPLES_DIR = "../doc/examples/"
 
 
 class TestStarTrace(unittest.TestCase):

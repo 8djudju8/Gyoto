@@ -52,7 +52,7 @@ class TestMetric(unittest.TestCase):
         GYOTO_PYTHON_DIR = "./"
         # GYOTO_EXAMPLES_DIR = GYOTO_PYTHON_DIR + "../doc/examples/"
         GYOTO_ARTIFACTS_DIR = GYOTO_PYTHON_DIR + "tests/artifacts/"
-
+        # gyoto.core.verbose(10)
         nnu = 2
         ni = 2
         nr = 10
@@ -115,6 +115,8 @@ class TestMetric(unittest.TestCase):
         print(f"{GYOTO_ARTIFACTS_DIR + "check-directionaldisk.fits.gz"}")
         directional_disk.fitsWrite("!check-directionaldisk.fits.gz",
                                    GYOTO_ARTIFACTS_DIR)
+        # directional_disk.fitsWrite("!check-directionaldisk.fits.gz")
+
         print("Saving scenery to XML file...")
         gyoto.core.Factory(sc).write(
             GYOTO_ARTIFACTS_DIR + "check-directionaldisk.xml")
@@ -123,6 +125,8 @@ class TestMetric(unittest.TestCase):
         # sc2 = gyoto.core.Scenery("check-directionaldisk.xml")
         sc2 = gyoto.core.Factory(GYOTO_ARTIFACTS_DIR
                                  + "check-directionaldisk.xml").scenery()
+        # sc2 = gyoto.core.Factory("check-directionaldisk.xml").scenery()
+
         # GYOTO_ARTIFACTS_DIR + "check-directionaldisk.xml").scenery()
         # Check
         # Compare Sceneries
@@ -133,8 +137,8 @@ class TestMetric(unittest.TestCase):
         self.assertEqual(sc2.screen().get("FieldOfView"),
                          sc.screen().get("FieldOfView"), "different fov")
         print("Removing temporary files...")
-        os.remove(GYOTO_ARTIFACTS_DIR + "check-directionaldisk.xml")
-        os.remove(GYOTO_ARTIFACTS_DIR + "check-directionaldisk.fits.gz")
+        # os.remove(GYOTO_ARTIFACTS_DIR + "check-directionaldisk.xml")
+        # os.remove(GYOTO_ARTIFACTS_DIR + "check-directionaldisk.fits.gz")
 
         file_output = PdfPages(GYOTO_ARTIFACTS_DIR + 'directionalDisk.pdf')
 

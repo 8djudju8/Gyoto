@@ -37,7 +37,6 @@
 #include <cstring>
 #include <cmath>
 #include <limits>
-#include <optional>
 
 using namespace std;
 using namespace Gyoto;
@@ -490,27 +489,36 @@ void PatternDisk::fitsWrite(std::string filename, const std::string & prefix) {
     //filename_ = filename
     if (filename_.compare(0,1,"!")){
 //        pixfile = const_cast<char*>((prefix.append(filename_)).c_str());
-        pixfile = const_cast<char*>((filename_.insert(0,prefix)).c_str());
+        pixfile = const_cast<char*>((filename.insert(0,prefix)).c_str());
         GYOTO_INFO << "pixfile :" << pixfile << endl;
     }
     else{
         cout << "filename :" << filename << " : PREFIX |" << prefix << "|"<< endl;
         filename_ = filename_.substr(1); 
+        filename = filename.substr(1); 
 //        pixfile = const_cast<char*>((prefix.append(filename_).insert(0,"!")).c_str());
-        pixfile = const_cast<char*>((filename_.insert(0,"!" + prefix)).c_str());
+        pixfile = const_cast<char*>((filename.insert(0,"!" + prefix)).c_str());
 //        pixfile = const_cast<char*>((filename_.insert(0,prefix).insert(0,"!")).c_str());
     }
   }
   else
     cout << "NO PREFIX  " << filename << endl;
 
+  cout << "pixfile|" << pixfile << "|" << endl;
   ////// CREATE FILE
- GYOTO_INFO << " writing pixfile :" << pixfile << endl;
-  GYOTO_DEBUG << "creating file \"" << pixfile << "\"... ";
-  fits_create_file(&fptr, pixfile, &status);
+  fits_create_file(&fptr,pixfile, &status);
+  if (status) {
+        GYOTO_INFO << status << endl;
+        GYOTO_INFO << "CFITSERROR create file" << endl;
+      throwCfitsioError(status) ;
+  }
+
   if (debug()) cerr << "done." << endl;
   fits_create_img(fptr, DOUBLE_IMG, 3, naxes, &status);
-  if (status) throwCfitsioError(status) ;
+  if (status) {
+        GYOTO_INFO << "CFITSERROR create img" << endl;
+      throwCfitsioError(status) ;
+  }
 
   ////// WRITE FITS KEYWORDS COMMON TO ALL TABLES ///////
   //set Omega and t0;

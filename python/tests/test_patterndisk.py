@@ -36,7 +36,9 @@ from matplotlib.backends.backend_pdf import PdfPages
 gyoto.core.requirePlugin('stdplug')
 # GYOTO_PYTHON_DIR = "./"
 # GYOTO_EXAMPLES_DIR = GYOTO_PYTHON_DIR + "../doc/examples/"
+# GYOTO_ARTIFACTS_DIR = "./tests/artifacts/"
 GYOTO_ARTIFACTS_DIR = "./tests/artifacts/"
+# GYOTO_XML_DIR = "./tests/artifacts/xml/"
 GYOTO_XML_DIR = "./tests/artifacts/xml/"
 
 
@@ -149,6 +151,8 @@ class TestPatternDisk(unittest.TestCase):
         # order is important
         TestPatternDisk.pd.fitsWrite("!check-patterndisk2.fits.gz",
                                      GYOTO_ARTIFACTS_DIR)
+        # TestPatternDisk.pd.fitsWrite("/home/brule/github_jb/Gyoto/python/tests/artifacts/checkpatterndisk2.fits.gz")
+        # TestPatternDisk.pd.fitsWrite("!uu.fits.gz")
         print("fitswrite ok")
         # Save Scenery same directory
         print("save scenery fits xml same directory")
@@ -194,7 +198,7 @@ class TestPatternDisk(unittest.TestCase):
         os.unlink(GYOTO_XML_DIR + "../fits/check-patterndisk3.fits.gz")
         os.unlink(GYOTO_XML_DIR + "check-patterndisk3.xml")
 
-    @unittest.skip("demonstrating skipping")
+    # @unittest.skip("demonstrating skipping")
     def PatternDisk_zzz(self):
         # Save Scenery different path
         print("========= FOURTH CASE save scenery fits xml diff directory")
@@ -212,7 +216,7 @@ class TestPatternDisk(unittest.TestCase):
         os.unlink("check-patterndisk.fits.gz")
         os.unlink(GYOTO_ARTIFACTS_DIR + "check-patterndisk.xml")
 
-    # @unittest.skip("demonstrating skipping")
+    @unittest.skip("demonstrating skipping")
     def test_PatternDisk_restore(self):
         TestPatternDisk.pd.fitsWrite("!check-patterndisk3.fits.gz",
                                      GYOTO_ARTIFACTS_DIR)
@@ -299,7 +303,7 @@ class TestPatternDisk(unittest.TestCase):
         # testing.assert_allclose(actual, desired, rtol=1e-07, atol=0,
         # equal_nan=True, err_msg='', verbose=True, *, strict=False)
 
-    # @unittest.skip("demonstrating skipping")
+    @unittest.skip("demonstrating skipping")
     def test_PatternDisk_raytrace(self):
         print(f"{type(TestPatternDisk)=}")
         # print(f"{type(self.sc)=}")

@@ -83,7 +83,7 @@ class TestStar(unittest.TestCase):
 
         print("Setting integrator")
         if gyoto.HAVE_BOOST:
-            st.integrator = "runge_kutta_fehlberg78"
+            st.integrator("runge_kutta_fehlberg78")
             st.deltaMaxOverR(0.1)
         else:
             st.metric().deltamaxoverr(0.1)

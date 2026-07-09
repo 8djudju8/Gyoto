@@ -384,14 +384,17 @@ void DirectionalDisk::fitsWrite(string filename, const std::string & prefix) {
     //filename_ = filename
     if (filename_.compare(0,1,"!")){
         // pixfile = const_cast<char*>((prefix.append(filename_)).c_str());
-        pixfile = const_cast<char*>((filename_.insert(0,prefix)).c_str());
+        pixfile = const_cast<char*>((filename.insert(0,prefix)).c_str());
         GYOTO_INFO << "pixfile :" << pixfile << endl;
     }
     else{
         cout << "filename :" << filename << " : PREFIX |" << prefix << "|"<< endl;
         filename_ = filename_.substr(1); 
+        filename = filename.substr(1); 
+        cout << "filename__ :" << filename_ << endl;
         // pixfile = const_cast<char*>((prefix.append(filename_).insert(0,"!")).c_str());
-        pixfile = const_cast<char*>((filename_.insert(0,"!" + prefix)).c_str());
+        pixfile = const_cast<char*>((filename.insert(0,"!" + prefix)).c_str());
+        cout << "pixfile" << pixfile << endl;
     }
   }
   else
